@@ -13,7 +13,6 @@ class FundingStageSerializer(serializers.ModelSerializer):
 class CompanySerializer(serializers.ModelSerializer):
     other_posts = serializers.SerializerMethodField()
     seed = FundingStageSerializer()
-    
     def get_other_posts(self, obj):
         posts = []
         for post in obj.company.all():

@@ -7,11 +7,7 @@ from job_posting.models import JobPosting as JobPostingModel
 
 
 # Create your views here.
-class JobPostingApiView(APIView):
-    def get(self, request):
-        posts = JobPostingModel.objects.all()
-        return Response(JobPostingSerializer(posts, many=True).data, status=status.HTTP_200_OK)
-    
+class JobPostingApiView(APIView):    
     def post(self, request):
         job_posting_serializer = JobPostingSerializer(data=request.data)
         if job_posting_serializer.is_valid():

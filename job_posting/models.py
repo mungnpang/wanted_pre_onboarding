@@ -10,7 +10,7 @@ class Skill(models.Model):
 
 
 class JobPosting(models.Model):
-    company = models.ForeignKey(to=Company, related_name="company_name", on_delete=models.CASCADE)
+    company = models.ForeignKey(to=Company, related_name="company", on_delete=models.CASCADE)
     position = models.CharField(max_length=64)
     reward = models.IntegerField(blank=True)
     description = models.TextField()
