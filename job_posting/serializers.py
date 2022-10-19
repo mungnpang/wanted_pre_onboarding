@@ -3,16 +3,9 @@ from rest_framework import serializers
 from job_posting.models import Skill as SkillModel
 from job_posting.models import JobPosting as JobPostingModel
 
-from company.serializers import CompanySerializer
-
-class SkillSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = SkillModel
-        fields = ["skill"]
-        
 
 class JobPostingSerializer(serializers.ModelSerializer):
-    job_skill = SkillSerializer(many=True)
+    job_skill = serializers.ListField()
     
     class Meta:
         model = JobPostingModel
@@ -24,7 +17,7 @@ class JobPostingSerializer(serializers.ModelSerializer):
         recruit.save()
 
         for skill in job_skill:
-            job_skill_object = SkillModel.objects.get(skill=skill['skill'])
+            job_skill_object = SkillModel.objects.get(skill=skill)
             recruit.job_skill.add(job_skill_object)
             
         return recruit
